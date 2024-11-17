@@ -2,9 +2,28 @@ import 'dart:developer';
 
 import 'package:church_mobile/core/errors/exceptions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class FirestoreService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  late final FirebaseFirestore _firestore;
+
+  FirestoreService() {
+    _initializeFirebase();
+  }
+
+  Future<void> _initializeFirebase() async {
+    try {
+      // Check if Firebase is already initialized
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+      _firestore = FirebaseFirestore.instance;
+      log('Firebase initialized successfully in FirestoreService');
+    } catch (e) {
+      log('Exception in _initializeFirebase: $e');
+      throw CustomException(message: 'Failed to initialize Firebase.');
+    }
+  }
 
   //~ Add a new document
   Future<void> addDocument({

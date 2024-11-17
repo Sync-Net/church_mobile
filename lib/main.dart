@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPrefs = CacheHelper();
   await sharedPrefs.init();
@@ -17,7 +17,7 @@ void main() async {
   Bloc.observer = CustomBlocServer();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(MyApp(router: router));
 }
 
