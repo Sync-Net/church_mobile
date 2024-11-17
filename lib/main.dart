@@ -2,6 +2,8 @@ import 'package:church_mobile/core/di/dependency_injection.dart';
 import 'package:church_mobile/core/router/router.dart';
 import 'package:church_mobile/core/services/cache_helper.dart';
 import 'package:church_mobile/core/services/custom_bloc_server.dart';
+import 'package:church_mobile/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -11,8 +13,11 @@ void main() async {
   final sharedPrefs = CacheHelper();
   await sharedPrefs.init();
   final GoRouter router = initializeRouter();
-  // setupGetit();
+  setupGetit();
   Bloc.observer = CustomBlocServer();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(MyApp(router: router));
 }
 
