@@ -3,6 +3,7 @@ import 'package:church_mobile/core/router/router.dart';
 import 'package:church_mobile/core/services/cache_helper.dart';
 import 'package:church_mobile/core/services/custom_bloc_server.dart';
 import 'package:church_mobile/firebase_options.dart';
+import 'package:church_mobile/hive_setup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await HiveSetup.initialize();
   runApp(MyApp(router: router));
 }
 
