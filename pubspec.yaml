@@ -61,7 +61,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
-        - asset: assets/font/Cairo-Light.ttf
+        - asset: assets/fonts/Cairo-Light.ttf
           weight: 300
 
 flutter_assets:
