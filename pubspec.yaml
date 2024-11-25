@@ -45,9 +45,8 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/image/icons_SVG/
   # example:
   # fonts:
   #   - family: Schyler
@@ -60,3 +59,10 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+
+flutter_assets:
+  assets_path: assets/image/icons_SVG
+  output_path: lib/core/constants/
+  filename: images.dart
+
