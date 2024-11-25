@@ -1,3 +1,4 @@
+import 'package:church_mobile/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,41 +49,44 @@ class AppTextFormField extends StatelessWidget {
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Color(0xffE6E9EA),
+                color: Color(0xff6A9AFB),
                 width: 1.3,
               ),
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(25.r),
             ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Color(0xffE6E9EA),
+                color: Color(0xff6A9AFB),
                 width: 1.3,
               ),
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(25.r),
             ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Colors.red,
             width: 1.3,
           ),
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(25.r),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Colors.red,
             width: 1.3,
           ),
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(25.r),
         ),
-        //! hintStyle: hintStyle ?? AppTextStyles.bodySmallBold13,
-        hintText: hintText,
+        labelText: hintText,
+        labelStyle: AppTextStyles.bodyRegular16
+            .copyWith(color: const Color(0xffAFC7F8)),
+        floatingLabelStyle: AppTextStyles.bodyRegular16
+            .copyWith(color: const Color(0xff6A9AFB)),
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? Color(0xffF9FAFA),
+        fillColor: backgroundColor ?? Color(0xffF7FAFF),
         filled: true,
       ),
       obscureText: isObscureText ?? false,
-      //! style:AppTextStyles.bodyBasaSemiBold16.copyWith(color: Color(0xff0C0D0D)),
+      style: AppTextStyles.bodyRegular16,
       validator: (value) {
         return validator(value);
       },
