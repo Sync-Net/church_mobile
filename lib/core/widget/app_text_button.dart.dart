@@ -1,27 +1,30 @@
-import 'package:church_mobile/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+enum ButtonType { filled, outlined, text }
 
 class AppTextButton extends StatelessWidget {
+  final double? width;
+  final double? height;
   final double? borderRadius;
   final Color? backgroundColor;
-  final double? horizontalPadding;
-  final double? verticalPadding;
-  final double? buttonWidth;
-  final double? buttonHeight;
-  final String buttonText;
+  final Color? borderColor;
+  final double? borderWidth;
   final TextStyle? textStyle;
+  final String buttonText;
+  final ButtonType buttonType;
   final VoidCallback onPressed;
+
   const AppTextButton({
     super.key,
+    this.width,
+    this.height,
     this.borderRadius,
     this.backgroundColor,
-    this.horizontalPadding,
-    this.verticalPadding,
-    this.buttonHeight,
-    this.buttonWidth,
-    required this.buttonText,
+    this.borderColor,
+    this.borderWidth,
     this.textStyle,
+    required this.buttonText,
+    this.buttonType = ButtonType.filled,
     required this.onPressed,
   });
 
@@ -29,32 +32,40 @@ class AppTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
-          ),
-        ),
-        backgroundColor: WidgetStatePropertyAll(
-          backgroundColor ?? Color(0xff0646C6),
-        ),
-        padding: WidgetStateProperty.all<EdgeInsets>(
-          EdgeInsets.symmetric(
-            horizontal: horizontalPadding?.w ?? 12.w,
-            vertical: verticalPadding?.h ?? 14.h,
-          ),
-        ),
         fixedSize: WidgetStateProperty.all(
-          Size(buttonWidth?.w ?? double.maxFinite, buttonHeight ?? 65.h),
+          Size(
+            (width ?? double.infinity).w,
+            (height ?? 40).h,
+          ),
+        ),
+        backgroundColor: WidgetStateProperty.all(
+          buttonType == ButtonType.filled ? backgroundColor ?? Colors.blue : Colors.transparent,
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular((borderRadius ?? 15.0).r),
+            side: buttonType == ButtonType.outlined
+                ? BorderSide(
+              color: borderColor ?? Colors.blue,
+              width: (borderWidth ?? 1.0).w,
+            )
+                : BorderSide.none,
+          ),
+        ),
+        overlayColor: WidgetStateProperty.all(
+          buttonType == ButtonType.text ? Colors.grey.withOpacity(0.1) : null,
         ),
       ),
       onPressed: onPressed,
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          buttonText,
-          style: textStyle ??
-              AppTextStyles.bodyRegular16.copyWith(color: Colors.white),
-        ),
+      child: Text(
+        buttonText,
+        style: textStyle ??
+            TextStyle(
+              fontSize: 16.sp,
+              color: buttonType == ButtonType.filled
+                  ? Colors.white
+                  : borderColor ?? Colors.blue,
+            ),
       ),
     );
   }
